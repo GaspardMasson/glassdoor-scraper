@@ -29,14 +29,18 @@ def extract_listingBanner(listing_soup):
             company_starRating = "NA"
         if company_starRating != "NA":
             try:
-                companyName = listing_bannerGroup.find("div", class_="css-16nw49e e11nt52q1").getText().replace(company_starRating,'')
+                #companyName = listing_bannerGroup.find("div", class_="css-16nw49e e11nt52q1").getText().replace(company_starRating,'')
+                companyName = listing_bannerGroup.find("div", class_="d-flex").getText().replace(company_starRating,'')
             except:
                 companyName = "NA"
+                #css-87uc0g e1tk4kwz1
             # company_starRating.replace("★", "")
             company_starRating = company_starRating[:-1]
         else:
             try:
-                companyName = listing_bannerGroup.find("div", class_="css-16nw49e e11nt52q1").getText()
+                companyName = listing_bannerGroup.find("div", class_="css-16nw49e e11nt52q1").find("div", class_="d-flex").getText()
+
+                #css-16nw49e e11nt52q1
             except:
                 companyName = "NA"
 
