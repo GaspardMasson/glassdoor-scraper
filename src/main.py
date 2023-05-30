@@ -36,7 +36,7 @@ class glassdoor_scraper():
             os.makedirs('output')
         now = datetime.now() # current date and time
         output_fileName = "./output/output_" + now.strftime("%d-%m-%Y") + ".csv"
-        csv_header = [("companyName", "company_starRating", "company_offeredRole", "company_roleLocation", "listing_jobDesc", "requested_url")]
+        csv_header = [("companyName", "company_starRating", "company_offeredRole", "company_roleLocation", "headquarters", "size", "type", "revenue", "listing_jobDesc", "requested_url")]
         self.fileWriter(listOfTuples=csv_header, output_fileName=output_fileName)
 
         maxJobs, maxPages = extract_maximums(base_url)
@@ -109,6 +109,7 @@ class glassdoor_scraper():
                 try:
                     csv_out.writerow(row_tuple)
                     # can also do csv_out.writerows(data) instead of the for loop
+                    print("c écrit")
                 except Exception as e:
                     print("[WARN] In filewriter: {}".format(e))
 

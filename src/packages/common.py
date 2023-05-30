@@ -6,6 +6,10 @@ from urllib.request import urlopen, Request
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup as soup
 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 # checks and corrects the scheme of the requested url
 def checkURL(requested_url):
@@ -16,6 +20,7 @@ def checkURL(requested_url):
 
 # fetches data from requested url and parses it through beautifulsoup
 def requestAndParse(requested_url):
+    
     requested_url = checkURL(requested_url)
     try:
         # define headers to be provided for request authentication

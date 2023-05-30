@@ -1,4 +1,11 @@
 # Import necessary libraries
+
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 # standard libraries
 from time import time
 # custom functions
@@ -9,7 +16,7 @@ except ModuleNotFoundError:
 
 
 # extracts desired data from listing banner
-def extract_listingBanner(listing_soup):
+def extract_listingBanner(listing_soup, requested_url):
     listing_bannerGroup_valid = False
 
     try:
@@ -21,7 +28,9 @@ def extract_listingBanner(listing_soup):
         company_starRating = "NA"
         company_offeredRole = "NA"
         company_roleLocation = "NA"
-    
+
+        
+
     if listing_bannerGroup_valid:
         try:
             company_starRating = listing_bannerGroup.find("span", class_="css-1pmc6te e11nt52q4").getText()
@@ -54,7 +63,67 @@ def extract_listingBanner(listing_soup):
         except:
             company_roleLocation = "NA"
 
-    return companyName, company_starRating, company_offeredRole, company_roleLocation
+        ##############################################################################################################
+
+        # Définition du chemin vers le pilote Chrome WebDriver
+        driver_path = 'C:\\Users\\gaspa\\Downloads\\chromedriver_win32\\chromedriver.exe'
+
+        # Instanciation du navigateur
+        driver = webdriver.Chrome(driver_path)
+        driver.get(requested_url)
+
+        # Localisation du span en cliquant dessus
+        span_locator = (By.CSS_SELECTOR, 'span.link.py-xsm.px-std')
+        text_to_find = 'Company'
+
+        try:
+            span_element = WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located(span_locator)
+            )
+            if text_to_find in span_element.text:
+                span_element.click()
+            else:
+                print("Le texte spécifié n'est pas présent dans le span.")
+        except:
+            print("Erreur lors de la recherche du span")
+            headquarters = "NA"
+            size = "NA"
+            type = "NA"
+            revenue = "NA"
+
+        # Obtention du contenu HTML de la page
+        html_content = driver.page_source
+
+        # Création de l'objet BeautifulSoup
+        soup = BeautifulSoup(html_content, "html.parser")
+
+        # Extraction des informations sur l'entreprise
+        entreprise_div = soup.find('div', id='InfoFields')
+
+        try:
+            # Récupération des différentes informations à l'intérieur du div
+            headquarters_element = entreprise_div.find('span', id='headquarters')
+            headquarters = headquarters_element.text.strip() if headquarters_element else "NA"
+
+            size_element = entreprise_div.find('span', id='size')
+            size = size_element.text.strip() if size_element else "NA"
+
+            type_element = entreprise_div.find('span', id='type')
+            type = type_element.text.strip() if type_element else "NA"
+
+            revenue_element = entreprise_div.find('span', id='revenue')
+            revenue = revenue_element.text.strip() if revenue_element else "NA"
+        except:
+            print("Erreur lors de l'extraction des informations sur l'entreprise")
+            headquarters = "NA"
+            size = "NA"
+            type = "NA"
+            revenue = "NA"
+
+        # Fermeture du navigateur
+        driver.quit()
+
+    return companyName, company_starRating, company_offeredRole, company_roleLocation, headquarters, size, type, revenue
 
 
 # extracts desired data from listing description
@@ -98,10 +167,10 @@ def extract_listing(url):
         return ("NA", "NA", "NA", "NA", "NA", "NA")
 
     if request_success:
-        companyName, company_starRating, company_offeredRole, company_roleLocation = extract_listingBanner(listing_soup)
+        companyName, company_starRating, company_offeredRole, company_roleLocation, headquarters, size, type, revenue = extract_listingBanner(listing_soup, requested_url)
         listing_jobDesc = extract_listingDesc(listing_soup)
 
-        return (companyName, company_starRating, company_offeredRole, company_roleLocation, listing_jobDesc, requested_url)
+        return (companyName, company_starRating, company_offeredRole, company_roleLocation, headquarters, size, type, revenue, listing_jobDesc, requested_url)
 
 
 if __name__ == "__main__":
