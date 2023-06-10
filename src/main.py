@@ -109,7 +109,6 @@ class glassdoor_scraper():
                 try:
                     csv_out.writerow(row_tuple)
                     # can also do csv_out.writerows(data) instead of the for loop
-                    print("c écrit")
                 except Exception as e:
                     print("[WARN] In filewriter: {}".format(e))
 
