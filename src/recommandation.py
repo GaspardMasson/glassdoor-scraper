@@ -8,7 +8,7 @@ def sort_by_enterprise_type(dataset, enterprise_type):
 
 
 
-def get_recommandations(offer_style, city, enterprise_type):
+def get_recommandations(job_type, location, enterprise_type, target_skills):
 
     dataset = read_data()
 
