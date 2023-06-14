@@ -60,12 +60,12 @@ def dialogue():
         target_skills.append(skills[int(skill)]) 
 
 
-    XXX = get_recommendations(jobs[job_type], location, types[enterprise_type], target_skills)
+    dataset = get_recommendations(jobs[job_type], location, types[enterprise_type], target_skills)
 
     # Afficher les 5 premières recommandations
     click.echo(colored('Voici les 5 premières recommandations :', '\n'+Fore.BLUE))
 
-    click.echo(XXX.head(5))
+    click.echo(dataset.head(5))
     # display_dataframe(XXX.head(5))
 
     click.echo(Fore.GREEN + 'Merci d\'avoir utilisé notre outil !' + Style.RESET_ALL)
