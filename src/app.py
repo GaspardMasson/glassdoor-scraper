@@ -1,9 +1,15 @@
 import click
 from colorama import Fore, Style
-# from recommandation import get_recommendations
+from recommandation import get_recommendations
+from tabulate import tabulate
 
 def colored(string,color):
     return color + string+Fore.RESET
+
+def display_dataframe(df):
+    # Affichage du DataFrame sous forme de tableau
+    table = tabulate(df, headers='keys', tablefmt='psql')
+    click.echo(table)
 
 
 def dialogue():
@@ -54,10 +60,15 @@ def dialogue():
         target_skills.append(skills[int(skill)]) 
 
 
-    # XXX = get_recommendations(job_type, location, enterprise_type, target_skills)
+    XXX = get_recommendations(jobs[job_type], location, types[enterprise_type], target_skills)
 
+    # Afficher les 5 premières recommandations
+    click.echo(colored('Voici les 5 premières recommandations :', '\n'+Fore.BLUE))
 
+    click.echo(XXX.head(5))
+    # display_dataframe(XXX.head(5))
 
+    click.echo(Fore.GREEN + 'Merci d\'avoir utilisé notre outil !' + Style.RESET_ALL)
 
 
 if __name__ == '__main__':
