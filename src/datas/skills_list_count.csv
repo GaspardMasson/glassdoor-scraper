@@ -1,0 +1,177 @@
+,count
+ 'business',46
+ 'support',38
+ 'engineering',26
+ 'design',23
+ 'monitoring',22
+ 'python',19
+ 'database'],19
+ 'python'],19
+ 'amp',16
+ 'visualization',16
+ 'marketing',15
+ 'collaboration',13
+['machine learning',13
+['algorithm',13
+ 'database',12
+ 'software',11
+ 'computer science'],8
+ 'finance',8
+ 'specification',8
+ 'testing'],8
+['documentation',8
+['monitoring',8
+[],8
+ 'framework',7
+ 'segmentation',7
+ 'support'],7
+ 'machine learning',7
+ 'server',7
+ 'mode',6
+ 'docker',6
+ 'programming language',6
+['engineering',6
+ 'ai',6
+ 'project management',6
+ 'business'],5
+['deployment',5
+['business',4
+ 'security'],4
+['java',4
+ 'mobile',4
+ 'time series',4
+ 'airflow',4
+['support',4
+ 'deep learning',4
+ 'devops',4
+['artificial intelligence',4
+ 'scalability',3
+['support'],3
+['design',3
+ 'component',3
+ 'tableau'],3
+ 'commerce',3
+ 'tableau',3
+ 'library',3
+ 'kubernetes',3
+ 'mobile'],3
+ 'rabbitmq',3
+ 'design'],3
+ 'artificial intelligence',3
+ 'numpy'],3
+ 'postgresql',3
+ 'documentation',3
+ 'computer science',3
+ 'elasticsearch',3
+['specification',3
+ 'flask',3
+['simulation',3
+ 'amp'],2
+['docker compose',2
+ 'nosql',2
+ 'publishing',2
+ 'analytics',2
+ 'react',2
+['business intelligence',2
+ 'release',2
+ 'schedule',2
+ 'segmentation'],2
+ 'redis',2
+ 'security',2
+ 'snowflake',2
+ 'javascript',2
+ 'graphql',2
+['segment',2
+ 'influxdb',2
+ 'engineering'],2
+ 'azure',2
+ 'interaction',2
+ 'cataloging',2
+['medium',2
+ 'github',2
+ 'diagram',2
+ 'marketing'],2
+ 'material',2
+ 'deployment',2
+['visualization',2
+ 'mongodb',2
+ 'tensorflow',2
+ 'gitlab',2
+ 'angularjs'],1
+ 'testing',1
+['amp'],1
+['algorithm'],1
+ 'user interface',1
+ 'workload',1
+['accounting',1
+ 'analytics'],1
+ 'computer engineering',1
+['analytics',1
+['buddy',1
+['workflow',1
+['tableau',1
+['search algorithm',1
+['python'],1
+['python',1
+['nosql',1
+ 'ai'],1
+['material',1
+['marketing',1
+['mariadb',1
+['localization'],1
+['github',1
+['engineering'],1
+['database',1
+['collaboration',1
+['certificate',1
+['business'],1
+ 'terminal',1
+ 'scala',1
+ 'telephony',1
+ 'system integration',1
+ 'operating system',1
+ 'business intelligence',1
+ 'mode'],1
+ 'metadata'],1
+ 'medium',1
+ 'business process',1
+ 'knowledge management',1
+ 'kafka',1
+ 'java',1
+ 'information management',1
+ 'image processing',1
+ 'hadoop',1
+ 'ground truth',1
+ 'git',1
+ 'front end',1
+ 'embedded system',1
+ 'django',1
+ 'certificate',1
+ 'code generation',1
+ 'correctness',1
+ 'computer vision',1
+ 'performance monitoring',1
+ 'postgresql'],1
+ 'process engineering'],1
+ 'search engine',1
+ 'supercomputer',1
+ 'statistical model',1
+ 'spring',1
+ 'azure machine learning'],1
+ 'solid modeling',1
+ 'software'],1
+ 'simulation',1
+ 'shell'],1
+ 'semantics',1
+ 'scripting language',1
+ 'process management',1
+ 'scikit learn',1
+ 'relay'],1
+ 'ranking',1
+ 'random forest',1
+ 'query language',1
+ 'pytorch',1
+ 'back office'],1
+ 'prometheus',1
+ 'programming language'],1
+ 'accounting',1

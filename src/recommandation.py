@@ -23,7 +23,7 @@ def filter_skills(row,target_skills):
     return False
 
 # Function to retrieve the recommendations
-def get_recommendations(job_type, location, enterprise_type, target_skills):
+def get_recommendations(job_type, location, enterprise_type, target_skills, similarity_weight, distance_weight):
 
     # Read the data
     dataset = read_data()
@@ -43,8 +43,8 @@ def get_recommendations(job_type, location, enterprise_type, target_skills):
 
     ##TODO 
     # Attribute a weight to the similarity score
-    similarity_weight = 0.8
-    distance_weight = 0.2
+    # similarity_weight = 0.8
+    # distance_weight = 0.2
 
     # Calculate the weighted similarity score
     dataset['weighted_similarity'] = dataset['similarity_score'] * similarity_weight

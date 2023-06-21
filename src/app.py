@@ -7,12 +7,17 @@ import pandas as pd
 def colored(string,color):
     return color + string+Fore.RESET
 
+# def display_dataframe(df):
+#     pd.set_option('display.max_columns', None)
+#     pd.set_option('display.max_colwidth', None)
+#     click.echo(df.to_string(index=False))
+
 def display_dataframe(df):
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_colwidth', None)
-    click.echo(df.to_string(index=False))
-
-
+    table = df.to_string(index=False)
+    table = '\n'.join([line.rstrip() for line in table.split('\n')])
+    click.echo(table)
 
 
 def dialogue():
@@ -43,7 +48,7 @@ def dialogue():
     enterprise_type = click.prompt(colored('Votre choix :','\n'+Fore.BLUE), type=int)
     click.echo('Vous avez choisi ' + colored(types[enterprise_type],Fore.CYAN))
 
-    skills = ["java", "business intelligence", "machine learning", "software", "artificial intelligence"]
+    skills = ["python","engineer","design","database","visualization","business","finance","github","azure machine learning", "business intelligence", "machine learning", "software", "artificial intelligence"]
 
     click.echo(colored('Quelles compétences recherchez-vous dans la liste suivante ?', '\n'+Fore.BLUE))
 
@@ -62,8 +67,10 @@ def dialogue():
         click.echo(colored(skills[int(skill)], Fore.CYAN)) 
         target_skills.append(skills[int(skill)]) 
 
+    similarity_weight = 0.8
+    distance_weight = 0.2
 
-    dataset = get_recommendations(jobs[job_type], location, types[enterprise_type], target_skills)
+    dataset = get_recommendations(jobs[job_type], location, types[enterprise_type], target_skills, similarity_weight, distance_weight)
 
     # Afficher les 5 premières recommandations
     click.echo(colored('Voici les 5 premières recommandations :', '\n'+Fore.BLUE))
@@ -73,6 +80,26 @@ def dialogue():
     
     # display_dataframe(XXX.head(5))
 
+    click.echo("\n")
+
+    # Afficher les poids de similarité et de distance et demander à l'utilisateur s'il souhaite les modifier
+    click.echo(colored('Les poids de similarité et de distance sont respectivement de ' + str(similarity_weight) + ' et ' + str(distance_weight) + '.', '\n'+Fore.BLUE))
+    click.echo(colored('Souhaitez-vous les modifier ? (Oui/Non)', '\n'+Fore.BLUE))
+
+    change_weights = click.prompt(colored('Votre choix :', '\n'+Fore.BLUE), type=str)
+
+    if change_weights == 'Oui':
+        similarity_weight = click.prompt(colored('Poids de similarité :','\n'+Fore.CYAN), type=float)
+        distance_weight = click.prompt(colored('Poids de distance :', Fore.CYAN), type=float)
+        dataset = get_recommendations(jobs[job_type], location, types[enterprise_type], target_skills, similarity_weight, distance_weight)
+
+        # Afficher les 5 premières recommandations
+        click.echo(colored('Voici les nouvelles recommandations :', '\n'+Fore.BLUE))
+
+        click.echo(dataset[["company_offeredRole", "Company_Name", "Company_RoleLocation", "distance_en_km", "weighted_similarity_distance"]].head(5))
+        display_dataframe(dataset["requested_url"].head(5))
+
+    click.echo("\n")
     click.echo(Fore.GREEN + 'Merci d\'avoir utilisé notre outil !' + Style.RESET_ALL)
 
 
