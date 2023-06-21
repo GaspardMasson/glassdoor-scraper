@@ -66,10 +66,11 @@ def extract_listingBanner(listing_soup, requested_url):
         ##############################################################################################################
 
         # Définition du chemin vers le pilote Chrome WebDriver
-        driver_path = 'C:\\Users\\gaspa\\Downloads\\chromedriver_win32\\chromedriver.exe'
+        # driver_path = 'C:\\Users\\gaspa\\Downloads\\chromedriver_win32\\chromedriver.exe'
+        # driver_path = 'h:\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe'
 
         # Instanciation du navigateur
-        driver = webdriver.Chrome(driver_path)
+        driver = webdriver.Chrome()
         driver.get(requested_url)
 
         # Localisation du span en cliquant dessus

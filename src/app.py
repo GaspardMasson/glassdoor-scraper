@@ -2,14 +2,17 @@ import click
 from colorama import Fore, Style
 from recommandation import get_recommendations
 from tabulate import tabulate
+import pandas as pd
 
 def colored(string,color):
     return color + string+Fore.RESET
 
 def display_dataframe(df):
-    # Affichage du DataFrame sous forme de tableau
-    table = tabulate(df, headers='keys', tablefmt='psql')
-    click.echo(table)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.max_colwidth', None)
+    click.echo(df.to_string(index=False))
+
+
 
 
 def dialogue():
@@ -65,7 +68,9 @@ def dialogue():
     # Afficher les 5 premières recommandations
     click.echo(colored('Voici les 5 premières recommandations :', '\n'+Fore.BLUE))
 
-    click.echo(dataset.head(5))
+    click.echo(dataset[["company_offeredRole", "Company_Name", "Company_RoleLocation", "distance_en_km", "weighted_similarity_distance"]].head(5))
+    display_dataframe(dataset["requested_url"].head(5))
+    
     # display_dataframe(XXX.head(5))
 
     click.echo(Fore.GREEN + 'Merci d\'avoir utilisé notre outil !' + Style.RESET_ALL)
