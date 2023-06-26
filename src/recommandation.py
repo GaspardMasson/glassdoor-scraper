@@ -25,10 +25,14 @@ def filter_skills(row,target_skills):
 # Function to retrieve the recommendations
 def get_recommendations(job_type, location, enterprise_type, target_skills, similarity_weight, distance_weight):
 
+    # importance of the location
+    if location == str(0):
+        distance_weight = 0
+
     # Read the data
     dataset = read_data()
 
-    # Filter the dataset based on the job type
+    # Filter the dataset based on the skills
     dataset = dataset[dataset.apply(lambda row: filter_skills(row, target_skills), axis=1)]
 
     # Calculate the similarity between the job description and the user preferences
@@ -41,7 +45,6 @@ def get_recommendations(job_type, location, enterprise_type, target_skills, simi
     # Add the similarity score to the dataset
     dataset['similarity_score'] = similarity_scores
 
-    ##TODO 
     # Attribute a weight to the similarity score
     # similarity_weight = 0.8
     # distance_weight = 0.2
@@ -60,14 +63,19 @@ def get_recommendations(job_type, location, enterprise_type, target_skills, simi
     min_distance = dataset['distance_en_km'].min()
     dataset['normalized_distance'] = (dataset['distance_en_km'] - min_distance) / (max_distance - min_distance)
 
+    # Normalize the star rating
+    max_star = dataset['company_starRating'].max()
+    min_star = dataset['company_starRating'].min()
+    dataset['normalized_star'] = (dataset['company_starRating'] - min_star) / (max_star - min_star)
+
     # Calculate the weighted distance
     dataset['weighted_distance'] = dataset['normalized_distance'] * distance_weight
 
     # Calculate the weighted similarity & distance score
-    dataset['weighted_similarity_distance'] = round(dataset['weighted_similarity'] - dataset['weighted_distance'], 3)
+    dataset['final score'] = round(dataset['weighted_similarity'] - dataset['weighted_distance'] + dataset["normalized_star"], 3)
 
     # Sort the dataframe by weighted similarity and distance
-    dataset = dataset.sort_values(by=['weighted_similarity_distance', 'distance_en_km'], ascending=[False, True])
+    dataset = dataset.sort_values(by=['final score', 'distance_en_km'], ascending=[False, True])
 
     # Return the top 5 results
-    return dataset[['company_offeredRole', 'Company_Name',"Company_RoleLocation","size", 'distance_en_km', 'weighted_similarity_distance',"requested_url"]].reset_index().head(5)
+    return dataset[['company_offeredRole', 'Company_Name',"Company_RoleLocation","size", 'distance_en_km', 'final score',"requested_url"]].reset_index().head(5)

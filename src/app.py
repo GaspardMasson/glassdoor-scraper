@@ -36,8 +36,13 @@ def dialogue():
     click.echo('Vous recherchez un poste de ' + colored(jobs[job_type],Fore.CYAN))
 
 
-    location = click.prompt(colored('Dans quelle ville recherchez-vous un emploi ?','\n'+Fore.BLUE), type=str)
-    click.echo('Vous avez choisi la ville de ' + colored(location,Fore.CYAN))
+    ##TODO : demander si la location a une importance (0 si non)
+    location = click.prompt(colored('Dans quelle ville recherchez-vous un emploi ? (0 si pas d\'importance)','\n'+Fore.BLUE), type=str)
+    if location == str(0):
+        click.echo('Vous n\'avez pas d\'importance pour la localisation')
+    else:
+        click.echo('Vous avez choisi la ville de ' + colored(location,Fore.CYAN))
+    
     enterprise_type = click.echo(colored('Quel type d\'entreprise recherchez-vous dans la liste suivante ?','\n'+Fore.BLUE))
 
     types = ['startup', 'PME', 'ETI', 'Grande entreprise']
